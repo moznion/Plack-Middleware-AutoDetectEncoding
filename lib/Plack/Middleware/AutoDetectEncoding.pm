@@ -19,11 +19,11 @@ use constant ENCODING_MAP => {
 sub call {
     my ($self, $env) = @_;
 
-    if ($env->{QUERY_STRING}) {
-        my ($detector) = $env->{QUERY_STRING} =~ m/__plack_middleware_auto_detect_encoding=([^&]+)/;
-        foreach my $encoding (%{+ENCODING_MAP}) {
+    if (my ($detector) = $env->{QUERY_STRING} =~ m/__plack_middleware_auto_detect_encoding=([^&]+)/) {
+        foreach my $encoding (keys %{+ENCODING_MAP}) {
             if ($detector eq ENCODING_MAP->{$encoding}) {
                 $env->{'plack.request.withencoding.encoding'} = $encoding;
+                last;
             }
         }
     }
