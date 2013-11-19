@@ -10,19 +10,21 @@ use Email::MIME::ContentType ();
 
 our $VERSION = "0.01";
 
+use constant ENCODING_MAP => {
+    'utf8'   => '%E9%A7%B1%E9%A7%9D',
+    'euc-jp' => '%F1%D1%F1%CC',
+    'cp932'  => '%E9p%E9k',
+};
+
 sub call {
     my ($self, $env) = @_;
 
     if ($env->{QUERY_STRING}) {
         my ($detector) = $env->{QUERY_STRING} =~ m/__plack_middleware_auto_detect_encoding=([^&]+)/;
-        if ($detector eq '%E9%A7%B1%E9%A7%9D') {
-            $env->{'plack.request.withencoding.encoding'} = 'utf8';
-        }
-        elsif ($detector eq '%F1%D1%F1%CC') {
-            $env->{'plack.request.withencoding.encoding'} = 'euc-jp';
-        }
-        elsif ($detector eq '%E9p%E9k') {
-            $env->{'plack.request.withencoding.encoding'} = 'cp932';
+        foreach my $encoding (%{+ENCODING_MAP}) {
+            if ($detector eq ENCODING_MAP->{$encoding}) {
+                $env->{'plack.request.withencoding.encoding'} = $encoding;
+            }
         }
     }
 
