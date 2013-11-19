@@ -43,6 +43,11 @@
       },
       "runtime" : {
          "requires" : {
+            "Email::MIME::ContentType" : "0",
+            "Encode" : "0",
+            "HTML::Parser" : "0",
+            "Plack::Middleware" : "0",
+            "parent" : "0",
             "perl" : "5.008005"
          }
       },
