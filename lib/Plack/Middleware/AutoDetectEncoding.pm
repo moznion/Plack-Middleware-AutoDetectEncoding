@@ -32,7 +32,9 @@ sub call {
         if($ct !~ m{^text/html}i and $ct !~ m{^application/xhtml[+]xml}i){
             return $res;
         }
-        my $charset = Email::MIME::ContentType::parse_content_type($ct)->{attributes}->{charset};
+
+        # If Content-Type doesn't contain charset, it uses utf8 as default
+        my $charset = Email::MIME::ContentType::parse_content_type($ct)->{attributes}->{charset} || 'utf8';
 
         my @out;
         my $p = HTML::Parser->new(
