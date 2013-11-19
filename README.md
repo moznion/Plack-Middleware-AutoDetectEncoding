@@ -2,6 +2,12 @@
 
 Plack::Middleware::AutoDetectEncoding - It's new $module
 
+# \*\*\* CAUTION \*\*\*
+
+This module is incomplete. Probably, there are many points which are not good.
+
+So, please __DO NOT USE THIS__.
+
 # SYNOPSIS
 
     use Plack::Middleware::AutoDetectEncoding;

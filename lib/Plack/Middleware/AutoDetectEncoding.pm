@@ -83,6 +83,12 @@ __END__
 
 Plack::Middleware::AutoDetectEncoding - It's new $module
 
+=head1 *** CAUTION ***
+
+This module is incomplete. Probably, there are many points which are not good.
+
+So, please B<DO NOT USE THIS>.
+
 =head1 SYNOPSIS
 
     use Plack::Middleware::AutoDetectEncoding;
